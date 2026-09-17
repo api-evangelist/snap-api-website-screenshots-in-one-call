@@ -1,0 +1,48 @@
+name: Snap API
+description: >-
+  Single-endpoint website-screenshot and rendering service that captures any public URL with a Chromium engine,
+  returning PNG/JPEG/WebP images, PDFs, or scroll/video recordings via one GET request. Designed for developers, n8n
+  workflows, and automated pipelines.
+url: https://raw.githubusercontent.com/api-evangelist/snap-api-website-screenshots-in-one-call/refs/heads/main/apis.yml
+created: '2026-09-17'
+modified: '2026-09-17'
+specificationVersion: '0.21'
+tags:
+  - screenshot API
+  - developer tools
+  - web capture
+  - n8n
+  - web scraping
+  - PDF generation
+  - automation
+  - rendering
+apis:
+  - name: Snap API
+    description: >-
+      REST/HTTP screenshot and rendering API. GET /v1/take (alias /v1/render) captures screenshots and PDFs; /v1/record
+      for scroll/video recording; /v1/usage for plan and credit metering. API-key authenticated via query param,
+      X-API-Key header, or Authorization Bearer.
+    humanURL: https://snap.flyhold.in/docs.html
+    baseURL: https://snap.flyhold.in
+    tags:
+      - screenshot API
+      - developer tools
+      - web capture
+      - n8n
+      - web scraping
+      - PDF generation
+      - automation
+      - rendering
+    properties:
+      - type: Documentation
+        url: https://snap.flyhold.in/docs.html
+      - type: LLMsTxt
+        url: https://snap.flyhold.in/llms.txt
+maintainers:
+  - FN: Snap API
+    url: https://snap.flyhold.in/
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 90
+  at: '2026-09-17T19:01:25.037Z'
