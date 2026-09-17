@@ -1,0 +1,61 @@
+generated: '2026-09-17'
+method: searched
+source: https://snap.flyhold.in/docs.html
+corroboration: >-
+  Live unauthenticated probe on 2026-09-17: GET https://snap.flyhold.in/v1/take with no params
+  returned HTTP 400 application/json {"error":"url and api_key ... are required."}, and
+  GET /v1/usage returned 400 {"error":"api_key ... required."}. No X-RateLimit-* / RateLimit-* /
+  Retry-After headers were observed on these responses; the only Snap-specific response header
+  documented and observed is X-Snap-Cache.
+checked: '2026-09-17'
+summary: >-
+  Snap API does not publish a classic requests-per-window rate limit. Consumption is metered as
+  monthly CREDITS tied to the plan (Developer 200, Starter 5,000, Growth 30,000 per month). Each
+  successful capture consumes one credit; a cache HIT within the <=1h render window and a failed
+  capture do not. Exhaustion is signalled with HTTP 429 and an error code CREDITS_EXHAUSTED. No
+  documented X-RateLimit-* / RateLimit-* / Retry-After response headers; clients should read the
+  credit balance from GET /v1/usage rather than from rate-limit headers.
+model: credit-metered (monthly quota), not per-window rate limiting
+limit_count: 3
+scopes:
+  - scope: per-account (per API key)
+    surface: REST (GET /v1/take, /v1/render, /v1/record)
+    window: 1 month (calendar month, resets at start of next period)
+    limit: 200
+    unit: successful captures (credits)
+    plan: Developer (free)
+    burst: null
+    status_on_exhaustion: 429
+    error_code: CREDITS_EXHAUSTED
+    counted: Only successful captures consume a credit; cache HIT and failed captures do not.
+  - scope: per-account (per API key)
+    surface: REST (GET /v1/take, /v1/render, /v1/record)
+    window: 1 month
+    limit: 5000
+    unit: successful captures (credits)
+    plan: Starter
+    burst: null
+    status_on_exhaustion: 429
+    error_code: CREDITS_EXHAUSTED
+  - scope: per-account (per API key)
+    surface: REST (GET /v1/take, /v1/render, /v1/record)
+    window: 1 month
+    limit: 30000
+    unit: successful captures (credits)
+    plan: Growth
+    burst: null
+    status_on_exhaustion: 429
+    error_code: CREDITS_EXHAUSTED
+headers:
+  request: []
+  response:
+    - name: X-Snap-Cache
+      values: [HIT, MISS, BYPASS]
+      meaning: >-
+        Whether the response came from the <=1h render cache (HIT, no credit burned), was freshly
+        rendered (MISS), or the cache was bypassed via cache=false (BYPASS).
+  rate_limit_headers_documented: false
+retry_after: null
+usage_endpoint:
+  path: /v1/usage
+  purpose: Returns plan and remaining-credit metering for the authenticated key.

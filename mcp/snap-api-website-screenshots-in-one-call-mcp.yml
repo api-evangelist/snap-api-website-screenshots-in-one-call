@@ -1,0 +1,58 @@
+generated: '2026-09-17'
+method: derived
+status: candidate
+source: https://snap.flyhold.in/docs.html + https://snap.flyhold.in/llms.txt
+checked: '2026-09-17'
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+search_result:
+  official_hosted_server: none
+  probes:
+    - url: https://snap.flyhold.in/mcp
+      method: POST tools/list
+      status: 404
+      note: '"Cannot POST /mcp" — Express server has no MCP route.'
+      checked: '2026-09-17'
+  third_party: []
+  finding: >-
+    Snap API publishes no MCP server (hosted or stdio) and no npm/PyPI package. Its agent-facing
+    surface is the first-party llms.txt at https://snap.flyhold.in/llms.txt. The tool list below is
+    a CANDIDATE derived from the documented HTTP endpoints so a future crosswalk has something to
+    bind to; the provider does not ship it. No endpoint URL is invented (mode: none).
+server:
+  name: snap-api
+  transport: null
+  url: null
+tools:
+  - name: take_screenshot
+    description: >-
+      Capture a screenshot or PDF of a public URL with a Chromium engine. Returns binary image/PDF
+      (or JSON data-URL with output=json). Consumes one credit per successful capture; cache HIT
+      within <=1h does not.
+    source_operation: docs.html#GET /v1/take (alias /v1/render)
+    proposed_operation_id: takeScreenshot
+    auth: api-key
+    inputs_from_docs:
+      required: [url]
+      optional: [width, height, full_page, file_type, quality, pdf_format, device_scale_factor, wait_until, wait_for_selector, delay, block_cookie_banners, block_ads, scroll_to_load, output, cache]
+  - name: record
+    description: Record a scroll/video capture of a public URL.
+    source_operation: docs.html#GET /v1/record
+    proposed_operation_id: record
+    auth: api-key
+    inputs_from_docs:
+      required: [url]
+      optional: [record_video, width, height, wait_until, delay]
+  - name: get_usage
+    description: Return the authenticated key's plan and remaining monthly credits.
+    source_operation: docs.html#GET /v1/usage
+    proposed_operation_id: getUsage
+    auth: api-key
+    inputs_from_docs:
+      required: []
+      optional: []

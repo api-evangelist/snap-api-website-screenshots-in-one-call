@@ -1,0 +1,39 @@
+generated: '2026-09-17'
+method: searched
+source: https://snap.flyhold.in/docs.html + https://snap.flyhold.in/terms.html + https://snap.flyhold.in/
+checked: '2026-09-17'
+versioning:
+  scheme: path
+  current: v1
+  notes: >-
+    All endpoints are served under a /v1/ path segment (/v1/take, alias /v1/render, /v1/record,
+    /v1/usage). No public version header, no dated media-type versioning, and no second live version
+    documented.
+changelog:
+  url: null
+  artifact: null
+  notes: >-
+    No dated changelog page found. The sitemap lists home, docs, n8n guide, three competitor
+    comparison pages, pricing.md, register and login — no /changelog. No ChangeLog pointer emitted.
+status_page:
+  url: null
+  provider: null
+  machine_readable_api: false
+  notes: >-
+    No status/uptime page found on snap.flyhold.in or a subdomain. No StatusPage pointer emitted.
+    GET /v1/usage exposes per-key credit state but is not a service-status surface.
+  probed:
+    - url: https://snap.flyhold.in/status.html
+      status: not-found
+      checked: '2026-09-17'
+deprecation:
+  policy_documented: false
+  sunset_header: not documented
+  deprecation_header: not documented
+  deprecated_operations: []
+  notes: >-
+    No deprecation or sunset policy published; RFC 8594 Sunset/Deprecation headers are not
+    documented. No Deprecation pointer emitted.
+sla:
+  documented: false
+  notes: Terms of service are published (terms.html) but no numeric uptime SLA was found.

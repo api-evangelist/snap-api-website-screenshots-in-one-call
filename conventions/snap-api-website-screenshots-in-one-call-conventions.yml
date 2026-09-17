@@ -1,0 +1,72 @@
+generated: '2026-09-17'
+method: searched
+source: https://snap.flyhold.in/docs.html
+corroboration: https://snap.flyhold.in/llms.txt
+checked: '2026-09-17'
+description: >-
+  Cross-cutting runtime semantics for Snap API — a single-purpose HTTP screenshot/render service.
+  Every operation is a GET that returns a binary media file (or a JSON data-URL wrapper when
+  output=json). There is no mutating surface, no session state, and no OpenAPI to derive from; this
+  profile is read from the developer documentation.
+base_url: https://snap.flyhold.in
+api_style: REST over HTTPS, GET-only, binary media responses (PNG/JPEG/WebP/PDF) or JSON via output=json
+authentication:
+  scheme: opaque API key
+  key_locations: [query api_key/token/apiKey, header X-API-Key, header Authorization Bearer]
+  docs: https://snap.flyhold.in/docs.html
+  detail: authentication/snap-api-website-screenshots-in-one-call-authentication.yml
+idempotency:
+  supported: false
+  coverage: na
+  mechanism: none
+  scope: []
+  rationale: >-
+    Read-only rendering API. Every documented operation is an HTTP GET with no side effects on
+    provider state beyond credit metering, so GET is inherently idempotent and no Idempotency-Key
+    header exists or is needed. A repeated identical capture within the <=1h window is additionally
+    served from cache (X-Snap-Cache: HIT) and does not consume a credit, but this is a caching, not
+    an idempotency-key, mechanism.
+reversibility:
+  applies: na
+  rationale: >-
+    No write/mutation surface exists. Captures produce a returned file and consume a credit; there
+    is nothing created on the provider side to cancel, refund, void, or restore. Reversibility is
+    not applicable to a read-only rendering API.
+dry_run_mode:
+  supported: false
+  applies: na
+  rationale: No write surface to rehearse; a capture is the terminal action and returns the artifact directly.
+pagination:
+  style: none
+  rationale: Each request returns a single rendered artifact; there are no list responses to paginate.
+caching:
+  render_cache: <=1 hour
+  bypass_param: cache=false
+  response_header: X-Snap-Cache
+  header_values: [HIT, MISS, BYPASS]
+  credit_note: A cache HIT does not consume a credit; cache=false forces a fresh render (BYPASS).
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  request_id_header: none documented
+versioning:
+  style: path
+  current: v1
+  detail: All endpoints are served under /v1/ (/v1/take, /v1/render, /v1/record, /v1/usage). No version header or media-type versioning.
+  detail_artifact: lifecycle/snap-api-website-screenshots-in-one-call-lifecycle.yml
+error_envelope:
+  shape: '{"error": "<message>"}'
+  content_type: application/json
+  rfc9457: false
+  detail_artifact: errors/snap-api-website-screenshots-in-one-call-problem-types.yml
+rate_limit_signaling:
+  model: monthly credit metering (per key), not per-window headers
+  exhaustion_status: 429
+  exhaustion_code: CREDITS_EXHAUSTED
+  balance_endpoint: /v1/usage
+  detail_artifact: rate-limits/snap-api-website-screenshots-in-one-call-rate-limits.yml
+output_negotiation:
+  file_type_param: file_type (aliases type) — png | jpeg | webp | pdf
+  json_wrapper_param: output=json (returns a data-URL JSON body with content type + metadata)

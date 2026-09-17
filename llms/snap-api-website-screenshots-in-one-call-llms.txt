@@ -1,0 +1,71 @@
+# Snap API
+
+> Website screenshot API. One GET request returns PNG, JPEG, WebP, or PDF. Cookie banners blocked. Free tier included. ≤1h render cache; header or query auth.
+
+Snap API (snap.flyhold.in) captures any public URL with a Chromium engine. Designed for developers, n8n workflows, and automated pipelines. No browsers to manage. Credits tracked in an inventory dashboard. Failed captures do not consume a credit.
+
+## Links
+
+- Home: https://snap.flyhold.in/
+- Register (200 free): https://snap.flyhold.in/register.html
+- Docs: https://snap.flyhold.in/docs.html
+- Login: https://snap.flyhold.in/login.html
+- n8n guide: https://snap.flyhold.in/guides-n8n.html
+- vs ScreenshotOne: https://snap.flyhold.in/vs-screenshotone.html
+- vs ApiFlash: https://snap.flyhold.in/vs-apiflash.html
+- vs Urlbox: https://snap.flyhold.in/vs-urlbox.html
+
+## API
+
+Endpoint: GET https://snap.flyhold.in/v1/take
+
+Query parameters:
+- api_key (required unless using a header) — from the dashboard after signup
+- url (required) — target page, https preferred
+- width — viewport width in px (e.g. 1280)
+- height — viewport height in px (e.g. 720)
+- file_type — png | jpeg | webp | pdf (default png)
+- block_cookie_banners — true | false (recommend true)
+- cache — omit for ≤1h render cache; cache=false to bypass (HIT does not burn a credit)
+
+Auth (any one): query `api_key` **or** header `X-API-Key` **or** `Authorization: Bearer <key>`.
+
+Response: binary file (image/png, image/jpeg, image/webp, or application/pdf). Response header `X-Snap-Cache: HIT|MISS|BYPASS`. For n8n, set Response format to File and timeout to 60 seconds.
+
+Example:
+
+```
+curl -G "https://snap.flyhold.in/v1/take" \
+  --data-urlencode "api_key=YOUR_API_KEY" \
+  --data-urlencode "url=https://example.com" \
+  --data-urlencode "width=1280" \
+  --data-urlencode "height=720" \
+  --data-urlencode "file_type=png" \
+  --data-urlencode "block_cookie_banners=true" \
+  --max-time 60 \
+  -o shot.png
+```
+
+## Pricing
+
+| Plan      | Price | Screenshots / month |
+|-----------|-------|---------------------|
+| Developer | $0    | 200                 |
+| Starter   | $9    | 5,000               |
+| Growth    | $29   | 30,000              |
+
+Optional one-time credit top-ups if you exceed the monthly allowance.
+
+## Positioning (honest)
+
+- Cheaper per screenshot than many alternatives at Starter/Growth volume.
+- Free: 200/month ongoing (not only a trial).
+- Simpler feature set than Urlbox / ScreenshotOne (no webhooks, S3, geo proxies yet).
+- Auth via `api_key` query **or** `X-API-Key` / `Authorization: Bearer`.
+- ≤1 hour render cache; cache HIT does not burn a credit; `cache=false` bypasses.
+- Failed captures do not consume a credit.
+
+## Optional
+
+- Support / privacy / terms: linked from the site footer.
+- Brand icon: https://snap.flyhold.in/brand/logo-icon.png

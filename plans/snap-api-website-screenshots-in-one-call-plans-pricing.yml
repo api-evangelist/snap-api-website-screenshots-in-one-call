@@ -1,0 +1,49 @@
+generated: '2026-09-17'
+method: searched
+source: https://snap.flyhold.in/pricing.md
+corroboration: https://snap.flyhold.in/llms.txt (identical tier table)
+checked: '2026-09-17'
+summary: >-
+  Snap API publishes three self-serve tiers with public prices and monthly screenshot quotas: a
+  perpetual free Developer tier (200/month, not a trial), Starter at $9/mo (5,000), and Growth at
+  $29/mo (30,000). Billing runs through Stripe Checkout (buy.stripe.com links in the site footer).
+  Optional one-time credit top-ups are offered when a plan's monthly allowance is exceeded. Pricing
+  is metered per successful screenshot; a cache HIT within the ≤1h window and a failed capture do
+  not consume a credit.
+plan_count: 3
+prices_published: true
+currency: USD
+billing_period: monthly
+public_signup_pricing: true
+metering_unit: screenshot (one successful capture = one credit)
+plans:
+  - name: Developer
+    price: 0
+    currency: USD
+    billing_period: monthly
+    included_quota: 200 screenshots/month
+    overage: one-time credit top-ups available
+    limits:
+      screenshots_per_month: 200
+    note: Free tier is ongoing, not a limited-time trial.
+  - name: Starter
+    price: 9
+    currency: USD
+    billing_period: monthly
+    included_quota: 5000 screenshots/month
+    overage: one-time credit top-ups available
+    limits:
+      screenshots_per_month: 5000
+  - name: Growth
+    price: 29
+    currency: USD
+    billing_period: monthly
+    included_quota: 30000 screenshots/month
+    overage: one-time credit top-ups available
+    limits:
+      screenshots_per_month: 30000
+credit_rules:
+  - Each successful capture consumes one credit.
+  - A cache HIT within the <=1 hour render window does not consume a credit.
+  - A failed capture does not consume a credit.
+  - Extra credits (one-time top-ups) have a separate lifecycle from monthly allowance.

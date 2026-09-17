@@ -2,11 +2,15 @@ name: Snap API
 description: >-
   Single-endpoint website-screenshot and rendering service that captures any public URL with a Chromium engine,
   returning PNG/JPEG/WebP images, PDFs, or scroll/video recordings via one GET request. Designed for developers, n8n
-  workflows, and automated pipelines.
+  workflows, and automated pipelines. API-key authenticated (query param, X-API-Key header, or Authorization Bearer)
+  with a perpetual free tier of 200 screenshots/month and paid Starter/Growth plans, a <=1h render cache, and credit
+  metering exposed at /v1/usage.
 url: https://raw.githubusercontent.com/api-evangelist/snap-api-website-screenshots-in-one-call/refs/heads/main/apis.yml
+image: https://snap.flyhold.in/brand/logo-icon.png
 created: '2026-09-17'
 modified: '2026-09-17'
 specificationVersion: '0.21'
+position: Producing
 tags:
   - screenshot API
   - developer tools
@@ -36,13 +40,59 @@ apis:
     properties:
       - type: Documentation
         url: https://snap.flyhold.in/docs.html
+      - type: APIReference
+        url: https://snap.flyhold.in/docs.html
       - type: LLMsTxt
         url: https://snap.flyhold.in/llms.txt
+      - type: Authentication
+        url: authentication/snap-api-website-screenshots-in-one-call-authentication.yml
+      - type: Conventions
+        url: conventions/snap-api-website-screenshots-in-one-call-conventions.yml
+      - type: ErrorCatalog
+        url: errors/snap-api-website-screenshots-in-one-call-problem-types.yml
+      - type: RateLimits
+        url: rate-limits/snap-api-website-screenshots-in-one-call-rate-limits.yml
+      - type: Lifecycle
+        url: lifecycle/snap-api-website-screenshots-in-one-call-lifecycle.yml
+      - type: Plans
+        url: plans/snap-api-website-screenshots-in-one-call-plans-pricing.yml
+      - type: MCPServer
+        url: mcp/snap-api-website-screenshots-in-one-call-mcp.yml
 maintainers:
   - FN: Snap API
     url: https://snap.flyhold.in/
+common:
+  - type: Website
+    url: https://snap.flyhold.in/
+  - type: Documentation
+    url: https://snap.flyhold.in/docs.html
+  - type: APIReference
+    url: https://snap.flyhold.in/docs.html
+  - type: GettingStarted
+    url: https://snap.flyhold.in/guides-n8n.html
+  - type: Pricing
+    url: https://snap.flyhold.in/pricing.md
+  - type: SignUp
+    url: https://snap.flyhold.in/register.html
+  - type: Login
+    url: https://snap.flyhold.in/login.html
+  - type: Support
+    url: https://snap.flyhold.in/support.html
+  - type: TermsOfService
+    url: https://snap.flyhold.in/terms.html
+  - type: PrivacyPolicy
+    url: https://snap.flyhold.in/privacy.html
+  - type: LLMsTxt
+    url: https://snap.flyhold.in/llms.txt
+  - type: DomainSecurity
+    url: security/snap-api-website-screenshots-in-one-call-domain-security.yml
 generated:
   by: apis.io/add
   model: claude-opus-4-8
   confidence: 90
   at: '2026-09-17T19:01:25.037Z'
+x-enrichment:
+  date: '2026-09-17'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v3

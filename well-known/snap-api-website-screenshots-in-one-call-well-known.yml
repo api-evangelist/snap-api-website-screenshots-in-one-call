@@ -1,0 +1,35 @@
+generated: '2026-09-17'
+method: probed
+source: live probes of /.well-known/ on the Snap API host
+checked: '2026-09-17'
+summary: >-
+  Nothing is served under /.well-known/ on snap.flyhold.in. Every standard discovery path
+  (security.txt, openid-configuration, oauth-authorization-server, oauth-protected-resource,
+  api-catalog, ai-plugin.json) returns HTTP 404 from the Express server ("Cannot GET ..."). No
+  WellKnown or SecurityTxt pointer is emitted — this file records a genuine absence, not a
+  presence. The provider is a single-host indie service with API-key auth and no OAuth surface,
+  so an OAuth/OIDC discovery document is not expected.
+pointer_basis: >-
+  No pointer emitted. All probed paths 404 with no served document, so per the pipeline rule a
+  WellKnown pointer would falsely assert the provider serves a discovery surface it does not.
+hosts:
+  - host: https://snap.flyhold.in
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        checked: '2026-09-17'
+      - path: /.well-known/openid-configuration
+        status: 404
+        checked: '2026-09-17'
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        checked: '2026-09-17'
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+        checked: '2026-09-17'
+      - path: /.well-known/api-catalog
+        status: 404
+        checked: '2026-09-17'
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        checked: '2026-09-17'

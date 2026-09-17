@@ -1,0 +1,15 @@
+generated: '2026-09-17'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: snap.flyhold.in
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 26 16:08:17 2026 GMT
+  hsts: false
+domains:
+- domain: flyhold.in
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: false

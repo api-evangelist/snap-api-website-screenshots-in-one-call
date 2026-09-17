@@ -1,0 +1,44 @@
+generated: '2026-09-17'
+method: searched
+source: https://snap.flyhold.in/docs.html
+corroboration: >-
+  Observed live 2026-09-17: GET /v1/take with no params -> 400 application/json
+  {"error":"url and api_key (or token / X-API-Key header) are required."}; GET /v1/usage -> 400
+  {"error":"api_key (or token / X-API-Key header) are required."}.
+checked: '2026-09-17'
+summary: >-
+  Snap API returns errors as a simple JSON envelope {"error": "<message>"} with an HTTP status
+  code. It does NOT use RFC 9457 problem+json (no type/title/status/detail members, content-type is
+  application/json not application/problem+json). Successful responses are binary media (or a JSON
+  data-URL wrapper when output=json). The documented failure classes are below.
+format: json-error-envelope
+rfc9457: false
+envelope:
+  content_type: application/json
+  shape: '{"error": "<human-readable message>"}'
+problem_types:
+  - status: 400
+    code: null
+    title: Invalid request parameters
+    detail: >-
+      Required parameters missing or malformed (e.g. url and api_key not supplied, invalid file
+      type or dimensions). Observed message: "url and api_key (or token / X-API-Key header) are
+      required."
+    remediation: Supply url plus a valid api_key/token/header and correct any malformed parameter values.
+  - status: 403
+    code: null
+    title: Missing, invalid, or inactive API key
+    detail: The API key was absent, not recognised, or the account is inactive.
+    remediation: Provide a valid active key from the dashboard via api_key query, X-API-Key, or Authorization Bearer.
+  - status: 429
+    code: CREDITS_EXHAUSTED
+    title: Rate limit or no credits available
+    detail: >-
+      The account has consumed its monthly credit allowance (or is otherwise throttled). The
+      documented code for the no-credits case is CREDITS_EXHAUSTED.
+    remediation: Wait for the monthly reset, upgrade the plan, or purchase a one-time credit top-up. Check GET /v1/usage.
+  - status: 5xx
+    code: null
+    title: Capture failed
+    detail: The screenshot/render/record engine failed to capture the target URL. A failed capture does not consume a credit.
+    remediation: Retry; verify the target URL is publicly reachable; adjust wait_until / wait_for_selector / delay for slow pages.
