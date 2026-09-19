@@ -12,6 +12,15 @@ modified: '2026-09-17'
 specificationVersion: '0.21'
 position: Producing
 tags:
+  - screenshot-api
+  - Developer Tools
+  - Web Capture
+  - n8n
+  - Web Scraping
+  - PDF Generation
+  - Automation
+  - Rendering
+tags_raw:
   - screenshot API
   - developer tools
   - web capture
@@ -29,6 +38,15 @@ apis:
     humanURL: https://snap.flyhold.in/docs.html
     baseURL: https://snap.flyhold.in
     tags:
+      - screenshot-api
+      - Developer Tools
+      - Web Capture
+      - n8n
+      - Web Scraping
+      - PDF Generation
+      - Automation
+      - Rendering
+    tags_raw:
       - screenshot API
       - developer tools
       - web capture
