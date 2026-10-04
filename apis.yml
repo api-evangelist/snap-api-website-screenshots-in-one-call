@@ -36,7 +36,6 @@ apis:
       for scroll/video recording; /v1/usage for plan and credit metering. API-key authenticated via query param,
       X-API-Key header, or Authorization Bearer.
     humanURL: https://snap.flyhold.in/docs.html
-    baseURL: https://snap.flyhold.in
     tags:
       - screenshot-api
       - Developer Tools
