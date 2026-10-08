@@ -79,6 +79,10 @@ maintainers:
   - FN: Snap API
     url: https://snap.flyhold.in/
 common:
+  - type: Plans
+    url: plans/snap-api-website-screenshots-in-one-call-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/snap-api-website-screenshots-in-one-call-rate-limits.yml
   - type: Website
     url: https://snap.flyhold.in/
   - type: Documentation
