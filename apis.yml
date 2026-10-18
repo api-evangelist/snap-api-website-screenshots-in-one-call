@@ -12,7 +12,7 @@ modified: '2026-09-17'
 specificationVersion: '0.21'
 position: Producing
 tags:
-  - screenshot-api
+  - Screenshots
   - Developer Tools
   - Web Capture
   - n8n
@@ -29,6 +29,7 @@ tags_raw:
   - PDF generation
   - automation
   - rendering
+  - screenshot-api
 apis:
   - name: Snap API
     description: >-
@@ -37,7 +38,7 @@ apis:
       X-API-Key header, or Authorization Bearer.
     humanURL: https://snap.flyhold.in/docs.html
     tags:
-      - screenshot-api
+      - Screenshots
       - Developer Tools
       - Web Capture
       - n8n
@@ -54,6 +55,7 @@ apis:
       - PDF generation
       - automation
       - rendering
+      - screenshot-api
     properties:
       - type: Documentation
         url: https://snap.flyhold.in/docs.html
